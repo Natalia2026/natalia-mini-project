@@ -12,16 +12,48 @@ function turnTracker(){
     }
 }
 
-function isThereaWinner(){
-    if (turnCounter>=5){
+function whoHasWon(){
+    if(turnCounter%2==0){
+        return whosWin = "O"
+    }else{
+        return whosWin = "X"
     }
+}
 
+function isThereaWinner(){
+    // not enough turns
+    if (turnCounter>=5){
+        //rows
+        if(currentIdNum%3===0 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+2]){
+            thereIsaWinner=true
+            whoHasWon()
+        }else if(currentIdNum%3===1 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1]){
+            thereIsaWinner=true
+            whoHasWon()
+        }else if(currentIdNum%3===2 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-2]){
+            thereIsaWinner=true
+            whoHasWon()
+        }
+        //Collums
+        if(currentIdNum<=2 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+6]){
+            thereIsaWinner=true
+            whoHasWon()
+        }else if(currentIdNum<=5 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3]){
+            thereIsaWinner=true
+            whoHasWon()
+        }else if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-6]){
+            thereIsaWinner=true
+            whoHasWon()
+        }
+        //Diagonal?
+    }
+    
 }
 
 function getTopText(){
     let toDisplay = document.querySelector("h2")
     if(thereIsaWinner){
-        toDisplay.textContent = `Player ${whosGo} has won!`
+        toDisplay.textContent = `Player ${whosWin} has won!`
     }else if(turnCounter===9){
         toDisplay.textContent = `It's a draw!`
     }else{
@@ -32,10 +64,13 @@ function getTopText(){
 /// Initialise variables ////////////////////////////////////////////////////////////////////////
 let turnCounter = 0
 let whosGo = "X"
+let whosWin = " "
 let thereIsaWinner = false
 let currentGridInputs = document.querySelectorAll("td")
 let currentGridInputsArray = Array.from(currentGridInputs).map(input=> input.textContent.trim());
 console.log(currentGridInputsArray)
+let currentIdStr = " "
+let currentIdNum = NaN
 
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
@@ -43,6 +78,9 @@ currentGridInputs.forEach(input =>{
     //console.log(input.textContent)
     input.addEventListener('click', ()=>{
     input.textContent = whosGo
+    currentIdStr=input.id
+    currentIdNum=Number(currentIdStr)
+    currentGridInputsArray[currentIdNum] = whosGo
     turnCounter++
     turnTracker()
     isThereaWinner()
