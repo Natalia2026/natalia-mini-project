@@ -53,7 +53,7 @@ function isThereaWinner(){
 function getTopText(){
     let toDisplay = document.querySelector("h2")
     if(thereIsaWinner){
-        toDisplay.textContent = `Player ${whosWin} has won!`
+        toDisplay.textContent = `Player ${whosWin} has won! Refresh the page to play again.`
     }else if(turnCounter===9){
         toDisplay.textContent = `It's a draw!`
     }else{
