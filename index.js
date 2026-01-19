@@ -20,6 +20,11 @@ function whoHasWon(){
     }
 }
 
+
+// function getGridParameters(){
+//     let modulos = 
+// }
+
 function isThereaWinner(){
     // not enough turns
     if (turnCounter>=5){
@@ -45,7 +50,9 @@ function isThereaWinner(){
             thereIsaWinner=true
             whoHasWon()
         }
-        //Diagonal?
+        //Diagonal
+        //3n+1
+        //if((currentIdNum === 0 || currentIdNum === 4 || currentIdNum === 8)&&(currentGridInputsArray))
     }
     
 }
@@ -67,26 +74,30 @@ let whosGo = "X"
 let whosWin = " "
 let thereIsaWinner = false
 let currentGridInputs = document.querySelectorAll("td")
-let currentGridInputsArray = Array.from(currentGridInputs).map(input=> input.textContent.trim());
+let currentGridInputsArray = new Array(9)
 console.log(currentGridInputsArray)
 let currentIdStr = " "
 let currentIdNum = NaN
+let gridSize=3
 
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
 currentGridInputs.forEach(input =>{
     //console.log(input.textContent)
     input.addEventListener('click', ()=>{
-    input.textContent = whosGo
-    currentIdStr=input.id
-    currentIdNum=Number(currentIdStr)
-    currentGridInputsArray[currentIdNum] = whosGo
-    turnCounter++
-    turnTracker()
-    isThereaWinner()
-    getTopText()
-    console.log(turnCounter)
-    } 
+        if(!input.textContent){
+            input.textContent = whosGo
+            currentIdStr=input.id
+            currentIdNum=Number(currentIdStr)
+            currentGridInputsArray[currentIdNum] = whosGo
+            console.log(currentGridInputsArray)
+            turnCounter++
+            turnTracker()
+            isThereaWinner()
+            getTopText()
+            console.log(turnCounter)
+        } 
+    }
 )})
 
 
@@ -122,6 +133,6 @@ currentGridInputs.forEach(input =>{
 //     console.log(cell.textContent)
 // }
 
-
+//let currentGridInputsArray = Array.from(currentGridInputs).map(input=> input.textContent.trim());
 
 
