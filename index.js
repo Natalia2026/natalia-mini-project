@@ -21,41 +21,37 @@ function whoHasWon(){
 }
 
 
-// function getGridParameters(){
-//     let modulos = 
-// }
 
 function isThereaWinner(){
     // not enough turns
-    if (turnCounter>=5){
+    //if (turnCounter>=winSize*2-1){
         //rows
-        if(currentIdNum%3===0 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+2]){
-            thereIsaWinner=true
-            whoHasWon()
-        }else if(currentIdNum%3===1 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1]){
-            thereIsaWinner=true
-            whoHasWon()
-        }else if(currentIdNum%3===2 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-2]){
-            thereIsaWinner=true
-            whoHasWon()
-        }
+        for(i in modulos){
+            console.log(modulos[i])
+            console.log(currentGridInputsArray)
+            console.log(currentGridInputsArray[currentIdNum+1])
+            if(currentIdNum%gridSize===modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+moduloChecks[moduloChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[moduloChecks.length-i-2]){
+                thereIsaWinner=true
+                whoHasWon()
+                }
+            }
+        
         //Collums
-        if(currentIdNum<=2 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+6]){
-            thereIsaWinner=true
-            whoHasWon()
-        }else if(currentIdNum<=5 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3]){
-            thereIsaWinner=true
-            whoHasWon()
-        }else if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-6]){
-            thereIsaWinner=true
-            whoHasWon()
-        }
+        for(j in maxes){
+            if(Math.trunc(currentIdNum/gridSize)==modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-1]]){
+                thereIsaWinner=true
+                whoHasWon()
+            }
+        } 
         //Diagonal
         //3n+1
         //if((currentIdNum === 0 || currentIdNum === 4 || currentIdNum === 8)&&(currentGridInputsArray))
-    }
     
 }
+
+
+
+
 
 function getTopText(){
     let toDisplay = document.querySelector("h2")
@@ -79,6 +75,13 @@ console.log(currentGridInputsArray)
 let currentIdStr = " "
 let currentIdNum = NaN
 let gridSize=3
+let winSize=3
+
+const modulos = Array.from({length:gridSize},(element, index) => index)
+const moduloChecks = (Array.from({length:(winSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(winSize-1)},(element, index) => (index+1)))))
+const maxes = Array.from({length:gridSize},(element, index) => (index+1)*gridSize-1)
+const maxChecks = moduloChecks.map(check => check*gridSize)
+
 
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
@@ -135,4 +138,36 @@ currentGridInputs.forEach(input =>{
 
 //let currentGridInputsArray = Array.from(currentGridInputs).map(input=> input.textContent.trim());
 
+
+// function isThereaWinner(){
+//     // not enough turns
+//     if (turnCounter>=5){
+//         //rows
+//         if(currentIdNum%3===0 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+2]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }else if(currentIdNum%3===1 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }else if(currentIdNum%3===2 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-1] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-2]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }
+//         //Collums
+//         if(currentIdNum<=2 && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+6]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }else if(currentIdNum<=5 &&currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+3]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }else if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-3] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum-6]){
+//             thereIsaWinner=true
+//             whoHasWon()
+//         }
+//         //Diagonal
+//         //3n+1
+//         //if((currentIdNum === 0 || currentIdNum === 4 || currentIdNum === 8)&&(currentGridInputsArray))
+//     }
+    
+// }
 
