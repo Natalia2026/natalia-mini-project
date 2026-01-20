@@ -27,20 +27,21 @@ function isThereaWinner(){
     //if (turnCounter>=winSize*2-1){
         //rows
         for(i in modulos){
-            console.log(modulos[i])
-            console.log(currentGridInputsArray)
-            console.log(currentGridInputsArray[currentIdNum+1])
-            if(currentIdNum%gridSize===modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+moduloChecks[moduloChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[moduloChecks.length-i-2]){
+            console.log(modulos)
+            console.log(currentIdNum+moduloChecks[moduloChecks.length-i-1])
+            if(currentIdNum%gridSize===modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+moduloChecks[moduloChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+moduloChecks[moduloChecks.length-i-2]]){
                 thereIsaWinner=true
                 whoHasWon()
+                console.log("won by row")
                 }
             }
         
         //Collums
         for(j in maxes){
-            if(Math.trunc(currentIdNum/gridSize)==modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-1]]){
+            if(Math.trunc(currentIdNum/gridSize)==modulos[i] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-1]] && currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-2]]){
                 thereIsaWinner=true
                 whoHasWon()
+                console.log("won by collums")
             }
         } 
         //Diagonal
