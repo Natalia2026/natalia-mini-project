@@ -61,9 +61,11 @@ function isThereaWinner(){
     }
 }
 
-
-
-
+function createTable(){
+    const table = document.querySelector(table)
+    for(let i = 0; i<=(gridSize);i++){
+        let row = table.insertRow(0)
+}}
 
 function getTopText(){
     let toDisplay = document.querySelector("h2")
@@ -97,6 +99,7 @@ const maxChecks = moduloChecks.map(check => check*gridSize)
 
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
+createTable()
 currentGridInputs.forEach(input =>{
     input.addEventListener('click', ()=>{
         if(!input.textContent){
