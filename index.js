@@ -62,16 +62,25 @@ function isThereaWinner(){
 }
 
 function createTable(){
-    const table = document.querySelector(table)
-    for(let i = 0; i<=(gridSize);i++){
-        let row = table.insertRow(0)
-}}
+    const table = document.querySelector("table")
+    let cellCount=0
+    for(let i = 0; i<=(gridSize-1);i++){
+        let row = document.createElement("tr")
+        table.appendChild(row)
+        for(let j = 0; j<=(gridSize-1); j++){
+            let cell = document.createElement("td")
+            cell.setAttribute('id',`${cellCount}`)
+            row.appendChild(cell)
+            cellCount++
+        }   
+    }
+}
 
 function getTopText(){
     let toDisplay = document.querySelector("h2")
     if(thereIsaWinner){
         toDisplay.textContent = `Player ${whosWin} has won! Refresh the page to play again.`
-    }else if(turnCounter===9){
+    }else if(turnCounter===gridSize*gridSize){
         toDisplay.textContent = `It's a draw!`
     }else{
         toDisplay.textContent = `It's player ${whosGo}'s turn`
@@ -84,25 +93,23 @@ let turnCounter = 0
 let whosGo = "X"
 let whosWin = " "
 let thereIsaWinner = false
-let currentGridInputs = document.querySelectorAll("td")
 let currentGridInputsArray = new Array(gridSize*gridSize)
 let currentIdStr = " "
 let currentIdNum = NaN
-
-
 
 const modulos = Array.from({length:gridSize},(element, index) => index)
 const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
 const maxes = Array.from({length:gridSize},(element, index) => (index+1)*gridSize-1)
 const maxChecks = moduloChecks.map(check => check*gridSize)
 
-
+createTable()
+let currentGridInputs = document.querySelectorAll("td")
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
-createTable()
+
 currentGridInputs.forEach(input =>{
     input.addEventListener('click', ()=>{
-        if(!input.textContent){
+        if(!input.textContent&&!thereIsaWinner){
             input.textContent = whosGo
             currentIdStr=input.id
             currentIdNum=Number(currentIdStr)
