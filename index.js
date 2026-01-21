@@ -4,6 +4,8 @@
 
 //Functions////////////////////////////////////////////////////////////////////////////////////
 
+    //Logic functions
+
 function turnTracker(){
     if(turnCounter%2==0){
         return whosGo = "X"
@@ -56,10 +58,40 @@ function isThereaWinner(){
             }
         }
         //Diagonal
-        //3n+1
-        //if((currentIdNum === 0 || currentIdNum === 4 || currentIdNum === 8)&&(currentGridInputsArray))
+        thereIsaTemporaryWinner=false
+        if(diagsOne.includes(currentIdNum)){
+            for(i in diagsOne){
+                if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[diagsOne[i]]){
+                    thereIsaTemporaryWinner=true
+                }else{
+                    thereIsaTemporaryWinner=false
+                    break
+                }
+            }
+            if(thereIsaTemporaryWinner==true){
+                thereIsaWinner = true
+                whoHasWon()
+            }
+        }
+        thereIsaTemporaryWinner=false
+        if(diagsTwo.includes(currentIdNum)){
+            for(i in diagsTwo){
+                if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[diagsTwo[i]]){
+                    thereIsaTemporaryWinner=true
+                }else{
+                    thereIsaTemporaryWinner=false
+                    break
+                }
+            }
+            if(thereIsaTemporaryWinner==true){
+                thereIsaWinner = true
+                whoHasWon()
+            }
+        }
     }
 }
+
+    //Html functions
 
 function createTable(){
     const table = document.querySelector("table")
@@ -88,7 +120,7 @@ function getTopText(){
 }
 
 /// Initialise variables ////////////////////////////////////////////////////////////////////////
-let gridSize=3
+let gridSize=4
 let turnCounter = 0
 let whosGo = "X"
 let whosWin = " "
@@ -99,8 +131,10 @@ let currentIdNum = NaN
 
 const modulos = Array.from({length:gridSize},(element, index) => index)
 const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
-const maxes = Array.from({length:gridSize},(element, index) => (index+1)*gridSize-1)
 const maxChecks = moduloChecks.map(check => check*gridSize)
+const diagsOne = Array.from({length:gridSize},(element, index) => (gridSize-1)*(index+1))
+const diagsTwo = Array.from({length:gridSize},(element, index) => (gridSize+1)*index)
+
 
 createTable()
 let currentGridInputs = document.querySelectorAll("td")
