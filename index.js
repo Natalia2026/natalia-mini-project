@@ -120,15 +120,19 @@ function getTopText(){
 }
 
 /// Initialise variables ////////////////////////////////////////////////////////////////////////
-let gridSize=4
 let turnCounter = 0
 let whosGo = "X"
 let whosWin = " "
 let thereIsaWinner = false
-let currentGridInputsArray = new Array(gridSize*gridSize)
 let currentIdStr = " "
 let currentIdNum = NaN
 
+let gridSize=4
+
+
+createTable()
+let currentGridInputs = document.querySelectorAll("td")
+let currentGridInputsArray = new Array(gridSize*gridSize)
 const modulos = Array.from({length:gridSize},(element, index) => index)
 const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
 const maxChecks = moduloChecks.map(check => check*gridSize)
@@ -136,11 +140,9 @@ const diagsOne = Array.from({length:gridSize},(element, index) => (gridSize-1)*(
 const diagsTwo = Array.from({length:gridSize},(element, index) => (gridSize+1)*index)
 
 
-createTable()
-let currentGridInputs = document.querySelectorAll("td")
+
 
 // Main Script //////////////////////////////////////////////////////////////////////////////////
-
 currentGridInputs.forEach(input =>{
     input.addEventListener('click', ()=>{
         if(!input.textContent&&!thereIsaWinner){
