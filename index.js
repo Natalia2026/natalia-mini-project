@@ -22,12 +22,12 @@ function whoHasWon(){
     }
 }
 
-function isThereaWinner(){
+function isThereaWinner(gridSize,modulos,moduloChecks,maxChecks,diagsOne,diagsTwo,currentGridInputsArray){
     // not enough turns
     if (turnCounter>=gridSize*2-1){
-        
         for(i in modulos){
             let thereIsaTemporaryWinner=false
+            //rows
             if(currentIdNum%gridSize===modulos[i]){
                 for(let j = 1; j<=(gridSize-1);j++){
                     if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+moduloChecks[moduloChecks.length-i-j]]){
@@ -42,6 +42,7 @@ function isThereaWinner(){
                     whoHasWon()
                 }
             }
+            //cols
             if(Math.trunc(currentIdNum/gridSize)==modulos[i]){
                 for(let j = 1; j<=(gridSize-1);j++){
                     if(currentGridInputsArray[currentIdNum]===currentGridInputsArray[currentIdNum+maxChecks[maxChecks.length-i-j]]){
@@ -127,26 +128,21 @@ let thereIsaWinner = false
 let currentIdStr = " "
 let currentIdNum = NaN
 
+
+// Main script /////////////////////////////////////////////////////////////////////////////////
 const button = document.querySelector("button")
 button.addEventListener('click',()=>{
     let number = document.querySelector("input").value
-    let gridSize = number
+    let gridSize = Number(number)
     createTable(gridSize)
-})
-
-let currentGridInputs = document.querySelectorAll("td")
-let currentGridInputsArray = new Array(gridSize*gridSize)
-const modulos = Array.from({length:gridSize},(element, index) => index)
-const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
-const maxChecks = moduloChecks.map(check => check*gridSize)
-const diagsOne = Array.from({length:gridSize},(element, index) => (gridSize-1)*(index+1))
-const diagsTwo = Array.from({length:gridSize},(element, index) => (gridSize+1)*index)
-
-
-
-
-// Main Script //////////////////////////////////////////////////////////////////////////////////
-currentGridInputs.forEach(input =>{
+    let currentGridInputs = document.querySelectorAll("td")
+    let currentGridInputsArray = new Array(gridSize*gridSize)
+    const modulos = Array.from({length:gridSize},(element, index) => index)
+    const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
+    const maxChecks = moduloChecks.map(check => check*gridSize)
+    const diagsOne = Array.from({length:gridSize},(element, index) => (gridSize-1)*(index+1))
+    const diagsTwo = Array.from({length:gridSize},(element, index) => (gridSize+1)*index)
+    currentGridInputs.forEach(input =>{
     input.addEventListener('click', ()=>{
         if(!input.textContent&&!thereIsaWinner){
             input.textContent = whosGo
@@ -155,11 +151,39 @@ currentGridInputs.forEach(input =>{
             currentGridInputsArray[currentIdNum] = whosGo
             turnCounter++
             turnTracker()
-            isThereaWinner()
+            isThereaWinner(gridSize,modulos,moduloChecks,maxChecks,diagsOne,diagsTwo,currentGridInputsArray)
             getTopText()
         } 
     }
 )})
+})
+
+// let currentGridInputs = document.querySelectorAll("td")
+// let currentGridInputsArray = new Array(gridSize*gridSize)
+// const modulos = Array.from({length:gridSize},(element, index) => index)
+// const moduloChecks = (Array.from({length:(gridSize-1)},(element, index) => -(index+1)).reverse().concat((Array.from({length:(gridSize-1)},(element, index) => (index+1)))))
+// const maxChecks = moduloChecks.map(check => check*gridSize)
+// const diagsOne = Array.from({length:gridSize},(element, index) => (gridSize-1)*(index+1))
+// const diagsTwo = Array.from({length:gridSize},(element, index) => (gridSize+1)*index)
+
+
+
+
+// Main Script //////////////////////////////////////////////////////////////////////////////////
+// currentGridInputs.forEach(input =>{
+//     input.addEventListener('click', ()=>{
+//         if(!input.textContent&&!thereIsaWinner){
+//             input.textContent = whosGo
+//             currentIdStr=input.id
+//             currentIdNum=Number(currentIdStr)
+//             currentGridInputsArray[currentIdNum] = whosGo
+//             turnCounter++
+//             turnTracker()
+//             isThereaWinner()
+//             getTopText()
+//         } 
+//     }
+// )})
 
 
 
