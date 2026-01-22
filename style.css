@@ -31,4 +31,21 @@ td{
     color: rgba(60, 1, 48, 0.688);
 }
 
+label{
+    color: rgba(60, 1, 48, 0.688);
+}
+
+input{
+    color: rgba(60, 1, 48, 0.688);
+    background-color: rgba(196, 6, 155, 0.688);
+    border: 2px solid rgba(60, 1, 48, 0.688);
+}    
+
+
+button{
+    color: rgba(60, 1, 48, 0.688);
+    background-color: rgba(196, 6, 155, 0.688);
+    border: 2px solid rgba(60, 1, 48, 0.688);
+    cursor: pointer;
+}
 

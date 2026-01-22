@@ -93,7 +93,7 @@ function isThereaWinner(){
 
     //Html functions
 
-function createTable(){
+function createTable(gridSize){
     const table = document.querySelector("table")
     let cellCount=0
     for(let i = 0; i<=(gridSize-1);i++){
@@ -127,10 +127,13 @@ let thereIsaWinner = false
 let currentIdStr = " "
 let currentIdNum = NaN
 
-let gridSize=4
+const button = document.querySelector("button")
+button.addEventListener('click',()=>{
+    let number = document.querySelector("input").value
+    let gridSize = number
+    createTable(gridSize)
+})
 
-
-createTable()
 let currentGridInputs = document.querySelectorAll("td")
 let currentGridInputsArray = new Array(gridSize*gridSize)
 const modulos = Array.from({length:gridSize},(element, index) => index)
