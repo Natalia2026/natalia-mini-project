@@ -91,8 +91,12 @@ function isThereaWinner(gridSize,modulos,moduloChecks,maxChecks,diagsOne,diagsTw
         }
     }
 }
+function getModulo(gridSize){
+    return Array.from({length:gridSize},(element, index) => index)
+}
 
-    //Html functions
+
+//Html functions
 
 function createTable(gridSize){
     const table = document.querySelector("table")
@@ -120,6 +124,12 @@ function getTopText(){
     }
 }
 
+function validateForm(n) {
+  if (Number(number)!=Number) {
+    document.querySelector("label") = "Please input an integer greater than three"
+  }
+}
+
 /// Initialise variables ////////////////////////////////////////////////////////////////////////
 let turnCounter = 0
 let whosGo = "X"
@@ -133,8 +143,9 @@ let currentIdNum = NaN
 const button = document.querySelector("button")
 button.addEventListener('click',()=>{
     let number = document.querySelector("input").value
-    let gridSize = Number(number)
+    const gridSize = Number(number)
     createTable(gridSize)
+    getTopText()
     let currentGridInputs = document.querySelectorAll("td")
     let currentGridInputsArray = new Array(gridSize*gridSize)
     const modulos = Array.from({length:gridSize},(element, index) => index)
